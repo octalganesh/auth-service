@@ -34,6 +34,14 @@ eureka:
 #    instance-id: ${EUREKA_INSTANCE_IP}:${spring.application.name}:${server.port}
 #    ip-address: ${EUREKA_INSTANCE_IP:${spring.cloud.client.ip-address}}
 
+jwt:
+  access:
+    token:
+      validity: 7776000
+  refresh:
+    token:
+      validity: 7776000
+  secret: fsm
 
 
 
