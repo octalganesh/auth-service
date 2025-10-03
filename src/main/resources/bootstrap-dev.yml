@@ -1,6 +1,6 @@
 spring:
   application:
-    name: auth-service
+    name: admin-service
   cloud:
     vault:
       uri: http://192.168.1.73:8200
@@ -9,5 +9,5 @@ spring:
       generic:
         enabled: true
         backend: dev/fms
-        default-context: auth-service
+        default-context: admin-service
         profile-separator: /

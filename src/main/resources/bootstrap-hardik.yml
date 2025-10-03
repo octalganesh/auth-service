@@ -5,9 +5,9 @@ spring:
     vault:
       uri: http://192.168.1.73:8200
       authentication: TOKEN
-      token: hvs.CAESICapLdcVZNFMG7oHZyFAJumHISCszXbqgBqT90MHDcwKGh4KHGh2cy5Bb21SRDJRVjJySENlZEk0bXpBbXFveWI   # better to export this in env
+      token: hvs.CAESIAe9c6wzXzcbdZm29rNR1Bh2gqvDTbDlVH-lgOIN5zVeGh4KHGh2cy5sclByYlhFVWlUQzBibzdGSk5CS0Z0eko   # better to export this in env
       generic:
         enabled: true
-        backend: uat/fms
+        backend: hardik/fms
         default-context: admin-service
         profile-separator: /
