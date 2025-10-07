@@ -18,9 +18,9 @@ spring:
 
 
   datasource:
-      url: jdbc:mysql://localhost:3306/fsm-auth
-      username: root
-      password: fns$321!#
+      url: ${DB_URL}
+      username: ${DB_USER}
+      password: ${DB_PASS}
       driver-class-name: com.mysql.cj.jdbc.Driver
       initialize: true
 
