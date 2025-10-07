@@ -58,8 +58,6 @@ public class  UserServiceImpl implements UserService {
     public UserDTO createUser(UserDTO userDTO) throws CodeException {
         if(TextUtils.isEmpty(userDTO.getEmail()))
             throw new CodeException("Email should not be empty", ErrorCode.COMMON);
-        if(TextUtils.isEmpty(userDTO.getPassword()))
-            throw new CodeException("Password should not be empty", ErrorCode.COMMON);
         if(TextUtils.isEmpty(userDTO.getFullName()))
             throw new CodeException("Full name should not be empty", ErrorCode.COMMON);
         Optional<Role>userRole=roleRepository.findByName(userDTO.getRole());
@@ -71,10 +69,12 @@ public class  UserServiceImpl implements UserService {
         UserDTO responseDTO = new UserDTO();
         if (existingUser.isPresent()) {
            // throw new CodeException("User with this email already exists", ErrorCode.COMMON);
-            existingUser.get().setPassword(userDTO.getPassword());
+            //existingUser.get().setPassword(userDTO.getPassword());
             existingUser.get().setFullName(userDTO.getFullName());
             existingUser.get().setToken(userDTO.getToken());
         }else {
+            if(TextUtils.isEmpty(userDTO.getPassword()))
+                throw new CodeException("Password should not be empty", ErrorCode.COMMON);
             // Create new user entity
             User user = new User();
             //user.setFirstName(userDTO.getFirstName());
