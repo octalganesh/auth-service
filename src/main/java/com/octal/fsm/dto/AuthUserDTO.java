@@ -17,6 +17,15 @@ public class AuthUserDTO {
     private String password;
     private Boolean isActive;
     private Boolean isDeleted;
+    private String userType;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     private String authToken;
 
