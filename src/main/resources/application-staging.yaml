@@ -20,7 +20,7 @@ spring:
   datasource:
       url: jdbc:mysql://localhost:3306/fsm-auth
       username: root
-      password: root
+      password: octal#321
       driver-class-name: com.mysql.cj.jdbc.Driver
       initialize: true
 
@@ -31,6 +31,16 @@ eureka:
   fetch-registry: true
   instance:
     prefer-ip-address: true
+
+
+jwt:
+  access:
+    token:
+      validity: 7776000
+  refresh:
+    token:
+      validity: 7776000
+  secret: fsm
 
 
 springdoc:

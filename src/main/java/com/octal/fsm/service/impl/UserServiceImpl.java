@@ -58,8 +58,6 @@ public class  UserServiceImpl implements UserService {
     public UserDTO createUser(UserDTO userDTO) throws CodeException {
         if(TextUtils.isEmpty(userDTO.getEmail()))
             throw new CodeException("Email should not be empty", ErrorCode.COMMON);
-        if(TextUtils.isEmpty(userDTO.getPassword()))
-            throw new CodeException("Password should not be empty", ErrorCode.COMMON);
         if(TextUtils.isEmpty(userDTO.getFullName()))
             throw new CodeException("Full name should not be empty", ErrorCode.COMMON);
         Optional<Role>userRole=roleRepository.findByName(userDTO.getRole());
@@ -71,10 +69,13 @@ public class  UserServiceImpl implements UserService {
         UserDTO responseDTO = new UserDTO();
         if (existingUser.isPresent()) {
            // throw new CodeException("User with this email already exists", ErrorCode.COMMON);
-            existingUser.get().setPassword(userDTO.getPassword());
+            //existingUser.get().setPassword(userDTO.getPassword());
             existingUser.get().setFullName(userDTO.getFullName());
             existingUser.get().setToken(userDTO.getToken());
+            existingUser.get().setActive(userDTO.isActive());
         }else {
+            if(TextUtils.isEmpty(userDTO.getPassword()))
+                throw new CodeException("Password should not be empty", ErrorCode.COMMON);
             // Create new user entity
             User user = new User();
             //user.setFirstName(userDTO.getFirstName());
@@ -85,6 +86,7 @@ public class  UserServiceImpl implements UserService {
             user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             user.setToken(userDTO.getToken());
             user.setCreatedAt(LocalDateTime.now());
+            user.setActive(userDTO.isActive());
 
             // Save user
             User savedUser = userRepository.save(user);
