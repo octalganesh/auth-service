@@ -72,6 +72,7 @@ public class  UserServiceImpl implements UserService {
             //existingUser.get().setPassword(userDTO.getPassword());
             existingUser.get().setFullName(userDTO.getFullName());
             existingUser.get().setToken(userDTO.getToken());
+            existingUser.get().setActive(userDTO.isActive());
         }else {
             if(TextUtils.isEmpty(userDTO.getPassword()))
                 throw new CodeException("Password should not be empty", ErrorCode.COMMON);
