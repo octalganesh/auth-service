@@ -32,7 +32,7 @@ pipeline {
           cp target/*.jar /opt/apps/auth-service-0.0.1-SNAPSHOT.jar
 
           echo 'Starting app...'
-          nohup java -jar /opt/apps/auth-service-0.0.1-SNAPSHOT.jar > /var/log/auth-service .txt 2>&1 &
+          nohup java -jar /opt/apps/auth-service-0.0.1-SNAPSHOT.jar > /var/log/auth-service.txt 2>&1 &
         """
       }
     }
