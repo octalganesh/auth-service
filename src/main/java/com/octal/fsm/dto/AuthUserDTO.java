@@ -16,8 +16,17 @@ public class AuthUserDTO {
     private String contactNumber;
     private String password;
     private Boolean isActive;
+    private String tenantId;
     private Boolean isDeleted;
     private String userType;
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
 
     public String getUserType() {
         return userType;

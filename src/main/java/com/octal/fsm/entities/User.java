@@ -34,6 +34,8 @@ public class User extends AbstractPersistable {
     private String token;
 
 
+    @Column(name = "tenant_id")
+    private String tenantId;
 
 
 }
