@@ -37,6 +37,9 @@ public class User extends AbstractPersistable {
     @Column(name = "tenant_id")
     private String tenantId;
 
+    @Column(name = "is_super_admin")
+    private Boolean isSuperAdmin;
+
 
 }
 

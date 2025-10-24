@@ -19,6 +19,15 @@ public class AuthUserDTO {
     private String tenantId;
     private Boolean isDeleted;
     private String userType;
+    private Boolean superAdmin;
+
+    public Boolean getSuperAdmin() {
+        return superAdmin;
+    }
+
+    public void setSuperAdmin(Boolean superAdmin) {
+        this.superAdmin = superAdmin;
+    }
 
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
