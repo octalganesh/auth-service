@@ -87,7 +87,7 @@ public class  UserServiceImpl implements UserService {
             user.setToken(userDTO.getToken());
             user.setCreatedAt(LocalDateTime.now());
             user.setActive(userDTO.isActive());
-
+            user.setTenantId(userDTO.getTenantId());
             // Save user
             User savedUser = userRepository.save(user);
 

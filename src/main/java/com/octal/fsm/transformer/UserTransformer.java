@@ -17,6 +17,8 @@ public class UserTransformer {
         authUserDTO.setDeleted(user.isDeleted());
         authUserDTO.setAuthToken(user.getToken());
         authUserDTO.setUserType(user.getRole().getName());
+        authUserDTO.setTenantId(user.getTenantId());
+        authUserDTO.setSuperAdmin(user.getIsSuperAdmin());
 
         return authUserDTO;
     };

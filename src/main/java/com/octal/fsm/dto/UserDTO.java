@@ -25,4 +25,6 @@ public class UserDTO {
     private LocalDateTime createdAt;
     private String role;
     private String token;
+    private String tenantId;
+
 }
