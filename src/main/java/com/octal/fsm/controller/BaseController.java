@@ -19,8 +19,6 @@ public class BaseController {
     private static final String API_URL = "http://ip-api.com/json/";
 
 
-
-
     protected ResponseEntity<ApiResponse> handleException(Exception e) {
         if (e instanceof CodeException) {
             return new ResponseEntity<>(new ApiResponse(Boolean.FALSE, e.getMessage(), null, String.valueOf(((CodeException) e).getCode().getCode()), HttpStatus.OK), HttpStatus.OK);
@@ -28,7 +26,6 @@ public class BaseController {
             return new ResponseEntity<>(new ApiResponse(Boolean.FALSE, e.getMessage(), null, "101", HttpStatus.OK), HttpStatus.OK);
         }
     }
-
 
 
 }

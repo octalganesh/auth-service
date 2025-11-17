@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class  UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -30,12 +30,12 @@ public class  UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email,String role) throws CodeException{
-        Optional<Role> userRole=roleRepository.findByName(role);
-        if(userRole.isEmpty()){
+    public AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email, String role) throws CodeException {
+        Optional<Role> userRole = roleRepository.findByName(role);
+        if (userRole.isEmpty()) {
             throw new CodeException("Role not found", ErrorCode.COMMON);
         }
-        Optional<User> user = userRepository.findByEmailAndRole(email,userRole.get());
+        Optional<User> user = userRepository.findByEmailAndRole(email, userRole.get());
         return user.map(UserTransformer.userToAuthDto::apply).orElse(null);
     }
 
@@ -56,25 +56,25 @@ public class  UserServiceImpl implements UserService {
 
     @Override
     public UserDTO createUser(UserDTO userDTO) throws CodeException {
-        if(TextUtils.isEmpty(userDTO.getEmail()))
+        if (TextUtils.isEmpty(userDTO.getEmail()))
             throw new CodeException("Email should not be empty", ErrorCode.COMMON);
-        if(TextUtils.isEmpty(userDTO.getFullName()))
+        if (TextUtils.isEmpty(userDTO.getFullName()))
             throw new CodeException("Full name should not be empty", ErrorCode.COMMON);
-        Optional<Role>userRole=roleRepository.findByName(userDTO.getRole());
-        if(userRole.isEmpty()){
+        Optional<Role> userRole = roleRepository.findByName(userDTO.getRole());
+        if (userRole.isEmpty()) {
             throw new CodeException("Role not found", ErrorCode.COMMON);
         }
         // Check if user with email already exists
-        Optional<User> existingUser = userRepository.findByEmailAndRole(userDTO.getEmail(),userRole.get());
+        Optional<User> existingUser = userRepository.findByEmailAndRole(userDTO.getEmail(), userRole.get());
         UserDTO responseDTO = new UserDTO();
         if (existingUser.isPresent()) {
-           // throw new CodeException("User with this email already exists", ErrorCode.COMMON);
+            // throw new CodeException("User with this email already exists", ErrorCode.COMMON);
             //existingUser.get().setPassword(userDTO.getPassword());
             existingUser.get().setFullName(userDTO.getFullName());
             existingUser.get().setToken(userDTO.getToken());
             existingUser.get().setActive(userDTO.isActive());
-        }else {
-            if(TextUtils.isEmpty(userDTO.getPassword()))
+        } else {
+            if (TextUtils.isEmpty(userDTO.getPassword()))
                 throw new CodeException("Password should not be empty", ErrorCode.COMMON);
             // Create new user entity
             User user = new User();
