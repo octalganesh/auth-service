@@ -2,9 +2,12 @@ package com.octal.fsm.controller;
 
 
 import com.octal.fsm.common.ApiResponse;
-import com.octal.fsm.dto.*;
+import com.octal.fsm.dto.AuthUserDTO;
+import com.octal.fsm.dto.AuthenticationResponse;
+import com.octal.fsm.dto.ChangePasswordDTO;
+import com.octal.fsm.dto.LoginRequest;
 import com.octal.fsm.entities.User;
- import com.octal.fsm.exceptions.CodeException;
+import com.octal.fsm.exceptions.CodeException;
 import com.octal.fsm.exceptions.InvalidPasswordException;
 import com.octal.fsm.jwt.JwtTokenProvider;
 import com.octal.fsm.repositories.UserRepository;
@@ -42,8 +45,8 @@ public class AuthController extends BaseController {
 
 
     @GetMapping(value = "/auth/details/by/email/{email}/{role}")
-    public ResponseEntity<AuthUserDTO> getUserByUserName(@PathVariable("email") String email,@PathVariable("role") String role) throws CodeException {
-        return ResponseEntity.ok(userService.fetchAuthenticatedUserDetailsByEmail(email,role));
+    public ResponseEntity<AuthUserDTO> getUserByUserName(@PathVariable("email") String email, @PathVariable("role") String role) throws CodeException {
+        return ResponseEntity.ok(userService.fetchAuthenticatedUserDetailsByEmail(email, role));
     }
 
 

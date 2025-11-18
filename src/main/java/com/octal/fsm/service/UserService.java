@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface UserService {
-    AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email,String role)throws CodeException;
+    AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email, String role) throws CodeException;
 
-    User getUserByEmailId(String email)throws CodeException;
+    User getUserByEmailId(String email) throws CodeException;
 
-    void resetUserPassword(String email)throws CodeException;
+    void resetUserPassword(String email) throws CodeException;
 
-    void resetUserPassword(String token, String newPassword, String confirmPassword)throws CodeException;
+    void resetUserPassword(String token, String newPassword, String confirmPassword) throws CodeException;
 
     UserDTO createUser(UserDTO userDTO) throws CodeException;
 }

@@ -1,8 +1,5 @@
 package com.octal.fsm.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This class is used to map authenticated user details in DTO,
  * this class will be used only for authenication purpose
