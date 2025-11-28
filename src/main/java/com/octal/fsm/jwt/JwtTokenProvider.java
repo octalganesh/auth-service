@@ -58,13 +58,13 @@ public class JwtTokenProvider {
 //        if (technician.getRole() != null) {
 //            roles.add(technician.getRole().getName());
 //        } else {
-            roles.add("ROLE_USER");
+        roles.add("ROLE_USER");
 //        }
 
         claims.put("id", user.getUuid());
         claims.put("emailId", user.getEmail());
         claims.put("fullName", user.getFullName());
-       // claims.put("lastName", user.getLastName());
+        // claims.put("lastName", user.getLastName());
         claims.put("role", roles.get(0));
         //claims.put("profileImage", user.getProfilePicture());
         claims.put("permission", "");

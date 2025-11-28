@@ -16,12 +16,12 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "role")
-public class Role extends AbstractPersistable{
+public class Role extends AbstractPersistable {
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "description",length = 512)
+    @Column(name = "description", length = 512)
     private String description;
 
 

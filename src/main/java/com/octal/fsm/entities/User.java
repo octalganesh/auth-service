@@ -16,13 +16,13 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User extends AbstractPersistable {
 
-    @Column(name = "full_name",nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,6 +34,11 @@ public class User extends AbstractPersistable {
     private String token;
 
 
+    @Column(name = "tenant_id")
+    private String tenantId;
+
+    @Column(name = "is_super_admin")
+    private Boolean isSuperAdmin;
 
 
 }

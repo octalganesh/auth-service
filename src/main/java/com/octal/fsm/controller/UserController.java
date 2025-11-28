@@ -9,14 +9,17 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
 
 @RestController
 @RequestMapping("/user")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
@@ -30,11 +33,11 @@ public class UserController extends BaseController{
             UserDTO createdUser = userService.createUser(userDTO);
 
             ApiResponse response = new ApiResponse(
-                Boolean.TRUE,
-                "User created successfully",
-                createdUser,
-                "200",
-                HttpStatus.OK
+                    Boolean.TRUE,
+                    "User created successfully",
+                    createdUser,
+                    "200",
+                    HttpStatus.OK
             );
 
             return new ResponseEntity<>(response, HttpStatus.CREATED);

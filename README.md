@@ -1,6 +1,7 @@
 # FSM Auth Service
 
-A Spring Boot microservice for authentication and authorization in the Field Service Management (FSM) SaaS platform. This service handles JWT-based authentication, user management, and integrates with Eureka service discovery.
+A Spring Boot microservice for authentication and authorization in the Field Service Management (FSM) SaaS platform.
+This service handles JWT-based authentication, user management, and integrates with Eureka service discovery.
 
 ## 🚀 Features
 
@@ -123,8 +124,8 @@ spring:
    ```
 
 3. **Configure Environment**
-   - Update database credentials in `application-dev.yaml`
-   - Configure Eureka server URL if different from default
+    - Update database credentials in `application-dev.yaml`
+    - Configure Eureka server URL if different from default
 
 4. **Build the Project**
    ```bash
@@ -204,7 +205,8 @@ java -jar target/auth-service-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 
 ## 🤝 Contributing
 
-This is a proprietary project for the FSM SaaS platform. Please follow the established coding standards and submit pull requests for review.
+This is a proprietary project for the FSM SaaS platform. Please follow the established coding standards and submit pull
+requests for review.
 
 ## 📝 License
 
