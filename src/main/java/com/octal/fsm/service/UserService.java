@@ -17,4 +17,6 @@ public interface UserService {
     void resetUserPassword(String token, String newPassword, String confirmPassword) throws CodeException;
 
     UserDTO createUser(UserDTO userDTO) throws CodeException;
+
+    UserDTO updateUser(UserDTO userDTO)throws CodeException;
 }
