@@ -100,5 +100,34 @@ public class UserServiceImpl implements UserService {
         }
         return responseDTO;
     }
+
+    @Override
+    public UserDTO updateUser(UserDTO userDTO) throws CodeException {
+        if (TextUtils.isEmpty(userDTO.getEmail()))
+            throw new CodeException("Email should not be empty", ErrorCode.COMMON);
+        if (TextUtils.isEmpty(userDTO.getFullName()))
+            throw new CodeException("Full name should not be empty", ErrorCode.COMMON);
+        Optional<Role> userRole = roleRepository.findByName(userDTO.getRole());
+        if (userRole.isEmpty()) {
+            throw new CodeException("Role not found", ErrorCode.COMMON);
+        }
+        Optional<User> existingUser = userRepository.findByEmailAndRole(userDTO.getEmail(),userRole.get());
+        UserDTO responseDTO = new UserDTO();
+        if (existingUser.isPresent()) {
+            existingUser.get().setFullName(userDTO.getFullName());
+            existingUser.get().setUpdatedAt(LocalDateTime.now());
+            User savedUser = userRepository.save(existingUser.get());
+
+            responseDTO.setId(savedUser.getUuid());
+            responseDTO.setFullName(savedUser.getFullName());
+            responseDTO.setEmail(savedUser.getEmail());
+            responseDTO.setCreatedAt(savedUser.getCreatedAt());
+            responseDTO.setActive(savedUser.getActive());
+            return responseDTO;
+        }else {
+            throw new CodeException("User with this email does not exists", ErrorCode.COMMON);
+        }
+
+    }
 }
 

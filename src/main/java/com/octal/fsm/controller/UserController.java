@@ -46,4 +46,18 @@ public class UserController extends BaseController {
             return handleException(e);
         }
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<ApiResponse> updateUser(@Valid @RequestBody UserDTO userDTO) {
+        try {
+            logger.info("Update user with email: {}", userDTO.getEmail());
+            System.out.println("Updating user: " + userDTO);
+            UserDTO createdUser = userService.updateUser(userDTO);
+            ApiResponse response = new ApiResponse(Boolean.TRUE,"User update successfully",createdUser,"200",HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e) {
+            logger.error("Error update user: {}", e.getMessage(), e);
+            return handleException(e);
+        }
+    }
 }
