@@ -25,6 +25,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String username = request.getHeader("username");
         if (StringUtils.isNotEmpty(username)) {
+            //need to implement tenant based user details loading if required
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());

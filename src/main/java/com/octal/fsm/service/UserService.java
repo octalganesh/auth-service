@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface UserService {
-    AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email, String role) throws CodeException;
+    AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email, String role,String tenantId) throws CodeException;
 
     User getUserByEmailId(String email) throws CodeException;
 

@@ -44,9 +44,9 @@ public class AuthController extends BaseController {
     private AuthenticationManager authenticationManager;
 
 
-    @GetMapping(value = "/auth/details/by/email/{email}/{role}")
-    public ResponseEntity<AuthUserDTO> getUserByUserName(@PathVariable("email") String email, @PathVariable("role") String role) throws CodeException {
-        return ResponseEntity.ok(userService.fetchAuthenticatedUserDetailsByEmail(email, role));
+    @GetMapping(value = "/auth/details/by/email/{email}/{role}/{tenantId}")
+    public ResponseEntity<AuthUserDTO> getUserByUserName(@PathVariable("email") String email, @PathVariable("role") String role,@PathVariable("tenantId") String tenantId) throws CodeException {
+        return ResponseEntity.ok(userService.fetchAuthenticatedUserDetailsByEmail(email, role,tenantId));
     }
 
 

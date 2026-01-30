@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -30,12 +31,17 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email, String role) throws CodeException {
+    public AuthUserDTO fetchAuthenticatedUserDetailsByEmail(String email, String role,String tenantId) throws CodeException {
         Optional<Role> userRole = roleRepository.findByName(role);
         if (userRole.isEmpty()) {
             throw new CodeException("Role not found", ErrorCode.COMMON);
         }
-        Optional<User> user = userRepository.findByEmailAndRole(email, userRole.get());
+        Optional<User> user;
+        if(tenantId != null && !tenantId.isEmpty()){
+            user = userRepository.findByEmailAndRoleAndTenantId(email, userRole.get(),tenantId);
+        }else{
+            user = userRepository.findByEmailAndRole(email, userRole.get());
+        }
         return user.map(UserTransformer.userToAuthDto::apply).orElse(null);
     }
 
@@ -64,8 +70,11 @@ public class UserServiceImpl implements UserService {
         if (userRole.isEmpty()) {
             throw new CodeException("Role not found", ErrorCode.COMMON);
         }
-        // Check if user with email already exists
-        Optional<User> existingUser = userRepository.findByEmailAndRole(userDTO.getEmail(), userRole.get());
+        Optional<User>  existingUser;
+        if(userDTO.getTenantId() != null){
+            existingUser = userRepository.findByEmailAndRoleAndTenantId(userDTO.getEmail(), userRole.get(), userDTO.getTenantId());
+        }else
+            existingUser = userRepository.findByEmailAndRole(userDTO.getEmail(), userRole.get());
         UserDTO responseDTO = new UserDTO();
         if (existingUser.isPresent()) {
             // throw new CodeException("User with this email already exists", ErrorCode.COMMON);
@@ -111,7 +120,12 @@ public class UserServiceImpl implements UserService {
         if (userRole.isEmpty()) {
             throw new CodeException("Role not found", ErrorCode.COMMON);
         }
-        Optional<User> existingUser = userRepository.findByEmailAndRole(userDTO.getEmail(),userRole.get());
+        Optional<User> existingUser;
+        if(userDTO.getTenantId() != null){
+            existingUser = userRepository.findByEmailAndRoleAndTenantId(userDTO.getEmail(), userRole.get(),userDTO.getTenantId());
+        }else{
+            existingUser = userRepository.findByEmailAndRole(userDTO.getEmail(),userRole.get());
+        }
         UserDTO responseDTO = new UserDTO();
         if (existingUser.isPresent()) {
             existingUser.get().setFullName(userDTO.getFullName());
